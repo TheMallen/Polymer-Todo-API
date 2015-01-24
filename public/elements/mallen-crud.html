@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 
 <polymer-element name="mallen-restful-crud" attributes="endpoint methods">
@@ -67,8 +67,8 @@
               }
               
               function bootstrapRoutesAndEvents(method) {
-                this[method] = function (params) { 
-                  this._doRequest(method, params}; 
+                this[method] = function (params, body) { 
+                  this._doRequest(method, params, body); 
                 };
                 this['on' + capitalize(method) +  'Completed'] = function (params) { 
                   this._fireAjaxEvent(method, 'completed', e);
