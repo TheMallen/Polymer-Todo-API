@@ -1,0 +1,85 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../baasic-ajax/baasic-ajax.html">
+<polymer-element name="mallen-restful-crud" attributes="endpoint methods">
+    <template>
+        
+        <ajax id="getRequest" 
+                 url="{{endpoint}}"
+                 handleAs="json"
+                 contentType="application/json"
+                 method="GET"
+                 on-core-response="{{onGetCompleted}}"
+                 on-core-error="{{onGetError}}"></ajax>
+        <ajax id="postRequest"
+                 url="{{endpoint}}"
+                 handleAs="json"
+                 contentType="application/json"
+                 method="POST"
+                 on-core-response="{{onPostCompleted}}"
+                 on-core-error="{{onPostError}}"></ajax>
+        <ajax id="putRequest"
+                 url="{endpoint}}"
+                 handleAs="json"
+                 contentType="application/json"
+                 method="PUT"
+                 on-core-response="{{onPutCompleted}}"
+                 on-core-error="{{onPutError}}"><ajax>
+        <ajax id="deleteRequest"
+                 url="{{endpoint}}"
+                 handleAs="json"
+                 contentType="application/json"
+                 method="DELETE"
+                 on-core-response="{{onDeleteCompleted}}"
+                 on-core-error="{{onDeleteError}}"></ajax>
+
+    </template>
+    <script>
+      
+        Polymer('mallen-restful-crud', {
+        
+            endpoint: '',
+          
+            methods: ['get', 'put', 'post', 'delete'],
+          
+            isLoading: function () {
+              // the service is loading if any of the requests are
+              return (this.$.postRequest.loading || this.$.getRequest.loading || this.$.putRequest.loading || this.$.deleteRequest.loading);
+            }, 
+          
+            _doRequest: function (method, params, body) {
+              var request = this.$[method + 'Request'];
+              request.params = params;
+              if (body) {
+                reqest.body = body;
+              }
+              request.go();
+            },
+            
+            _fireAjaxEvent: function (method, outcome, e) {
+              this.fire(method + '-' + 'outcome', { response: e.detail.response });
+            },
+        
+            created: function () {
+              
+              function capitalize(s) {
+                return s && s[0].toUpperCase() + s.slice(1);
+              }
+              
+              function bootstrapRoutesAndEvents(method) {
+                this[method] = function (params) { 
+                  this._doRequest(method, params}; 
+                };
+                this['on' + capitalize(method) +  'Completed'] = function (params) { 
+                  this._fireAjaxEvent(method, 'completed', e);
+                };
+                this['on' + capitalize(method) +  'Completed'] = function (params) { 
+                  this._fireAjaxEvent(method, 'error', e);
+                };    
+              }
+              
+              this.methods.forEach(bootstrapRoutesAndEvents, this);
+            }
+            
+        });
+    </script>
+</polymer-element>

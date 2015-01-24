@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   var TodoItem = sequelize.define("TodoItem", {
-    title: DataTypes.STRING,
-    description: DataTypes.STRING
+    text: DataTypes.STRING,
+    isDone: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false }
   }, {
     classMethods: {
       associate: function (models) {

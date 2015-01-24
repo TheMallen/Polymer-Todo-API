@@ -12,8 +12,7 @@
     <div>
     
       <template repeat="{{todo in todos}}">
-        <todo-item tdtitle="{{todo.title}}">
-          <p>{{todo.description}}</p>
+        <todo-item text="{{todo.text}}" done="{{todo.isDone}}">
         </todo-item>
       </template>
       

@@ -1,12 +1,13 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
- <polymer-element name="todo-item" attributes="tdtitle">
+ <polymer-element name="todo-item" attributes="text done">
   <template>
     <!-- shadow dom -->
     <div>
-      <h2>{{tdtitle}}</h2>
-      <content></content>
+      <h2>{{text}}</h2>
+      <p>Done?: {{done}}</p>
     </div>
+    
   </template>
   <script>
     Polymer('todo-item', {
