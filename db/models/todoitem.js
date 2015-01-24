@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  var TodoItem = sequelize.define("Spot", {
+  var TodoItem = sequelize.define("TodoItem", {
     description
   }, {
     classMethods: {
