@@ -1,0 +1,34 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="todo-service" attributes="posts">
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="ajax"
+      auto
+      url="http://localhost:3000/api/todoItems"
+      on-core-response="{{loaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+  <script>
+  Polymer('post-service', {
+    created: function() {
+      this.todos = [];
+    },
+    
+    loaded: function() {
+      // Make a copy of the loaded data
+      this.todos = this.$.ajax.response.slice(0);
+    },
+
+    createTodo: function(title, text) {
+      console.log('create called');
+    }
+  });
+  </script>
+</polymer-element>

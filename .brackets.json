@@ -1,0 +1,7 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/Sites/todo-api/public/bower_components/webcomponentsjs/webcomponents.min.js",
+        "C:/Sites/todo-api/public/bower_components/webcomponentsjs/webcomponents.js",
+        "C:/Sites/todo-api/public/bower_components/web-animations-js/templates/web-animations.js"
+    ]
+}

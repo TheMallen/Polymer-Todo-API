@@ -1,0 +1,16 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+ <polymer-element name="todo-item" attributes="tdtitle">
+  <template>
+    <!-- shadow dom -->
+    <div>
+      <h2>{{tdtitle}}</h2>
+      <content></content>
+    </div>
+  </template>
+  <script>
+    Polymer('todo-item', {
+      tdtitle: "todo title",
+    });
+  </script>
+</polymer-element>
