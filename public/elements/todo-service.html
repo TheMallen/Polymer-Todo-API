@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 
-<polymer-element name="todo-service" attributes="posts">
+<polymer-element name="todo-service" attributes="todos">
   <template>
     <style>
     :host {
@@ -24,6 +24,7 @@
     loaded: function() {
       // Make a copy of the loaded data
       this.todos = this.$.ajax.response.slice(0);
+      console.log(this.todos);
     },
 
     createTodo: function(title, text) {
