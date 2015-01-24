@@ -1,15 +1,18 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="todo-item.html">
+<link rel="import" href="todo-service.html">
 
 <polymer-element name="todo-list">
   <!-- outermost template defines the element's shadow DOM -->
   <template>
     
+    <todo-service todos="{{todos}}"></todo-service>
+    
     <div>
-
+    
       <template repeat="{{todo in todos}}">
         <todo-item tdtitle="{{todo.title}}">
-          <p>{{todo.text}}</p>
+          <p>{{todo.description}}</p>
         </todo-item>
       </template>
       
