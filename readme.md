@@ -1,3 +1,9 @@
+NOT WORKING YET
+================
+- api works
+- no polymer code yet
+- :P
+
 POLYMER TODO:
 --------------
 
