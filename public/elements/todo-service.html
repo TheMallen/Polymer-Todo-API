@@ -29,6 +29,10 @@
 
     createTodo: function(title, text) {
       console.log('create called');
+    },
+    
+    loading: function() {
+      return this.$.ajax.loading;
     }
   });
   </script>

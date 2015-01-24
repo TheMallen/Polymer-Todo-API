@@ -1,9 +1,10 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">to
 <link rel="import" href="todo-item.html">
 <link rel="import" href="todo-service.html">
+<link rel="import" href="todo-new-form.html">
 
 <polymer-element name="todo-list">
-  <!-- outermost template defines the element's shadow DOM -->
+
   <template>
     
     <todo-service todos="{{todos}}"></todo-service>
@@ -17,6 +18,9 @@
       </template>
       
     </div>
+    
+    <todo-new-form></todo-new-form>
+    
   </template>
   <script>
     Polymer('todo-list', {});
