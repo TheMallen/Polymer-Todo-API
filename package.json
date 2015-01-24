@@ -1,0 +1,28 @@
+{
+  "name": "todoApi",
+  "version": "1.0.0",
+  "description": "wip",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Mathew Allen",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.10.1",
+    "epilogue": "^0.3.3",
+    "express": "^4.11.0",
+    "sequelize": "^2.0.0-rc1",
+    "sequelize-cli": "^1.0.4",
+    "sqlite3": "^3.0.4"
+  },
+  engines: {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  }
+}
