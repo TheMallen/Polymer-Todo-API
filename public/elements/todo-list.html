@@ -7,7 +7,7 @@
 
   <template>
     
-    <todo-service todos="{{todos}}"></todo-service>
+    <todo-service id="todo-service" todos="{{todos}}"></todo-service>
     
     <div>
     
@@ -22,7 +22,9 @@
       
     </div>
     
-    <todo-new-form on-submit="createTodo"></todo-new-form>
+    <todo-new-form 
+      on-submit-todo="{{createTodo}}"
+      ></todo-new-form>
     
   </template>
   <script>
@@ -39,8 +41,8 @@
         
         createTodo: function (event, detail, sender) {
           alert('new todo!');
+          this.$["todo-service"].createTodo(detail.text);
         }
-      
                            
       });
     })();

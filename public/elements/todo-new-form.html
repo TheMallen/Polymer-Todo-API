@@ -5,16 +5,20 @@
 <polymer-element name="todo-new-form">
  <template>
 
-  <paper-input-decorator label="Title">
-      <input is="core-input">
-  </paper-input-decorator>
 
-  <paper-input-decorator floatingLabel label="Description">
-      <textarea></textarea>
+  <paper-input-decorator floatingLabel label="New Todo Item">
+      <input is="core-input" id="newItem"></input>
   </paper-input-decorator>
+  <button on-click="{{fireSubmit}}">    
+    Submit
+  </button>
 
  </template>
  <script>
-  Polymer('todo-new-form',{});
+  Polymer('todo-new-form',{
+    fireSubmit: function (event, detail, sender) {
+      this.fire('submit-todo', { text: this.$.newItem.value });
+    }
+  });
  </script>
 </polymer-element>

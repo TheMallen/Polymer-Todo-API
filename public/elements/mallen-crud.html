@@ -67,12 +67,15 @@
               }
               
               function bootstrapRoutesAndEvents(method) {
+                
                 this[method] = function (params, body) { 
                   this._doRequest(method, params, body); 
                 };
+                
                 this['on' + capitalize(method) +  'Completed'] = function (params) { 
                   this._fireAjaxEvent(method, 'completed', e);
                 };
+                
                 this['on' + capitalize(method) +  'Error'] = function (params) { 
                   this._fireAjaxEvent(method, 'error', e);
                 };    
