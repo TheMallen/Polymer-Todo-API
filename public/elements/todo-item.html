@@ -1,17 +1,35 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
- <polymer-element name="todo-item" attributes="text done">
+ <polymer-element name="todo-item" attributes="model">
   <template>
     <!-- shadow dom -->
     <div>
-      <h2>{{text}}</h2>
-      <p>Done?: {{done}}</p>
+      <h2>{{model.text}}</h2>
+      <p>Done?: {{model.isDone}}</p>
+      <button on-click="{{fireDone}}">
+        MARK DONE
+      </button>
+      <button on-click="{{fireDelete}}">
+        DELETE
+      </button>
     </div>
     
   </template>
   <script>
-    Polymer('todo-item', {
-      tdtitle: "todo title",
-    });
+    (function() {
+      Polymer('todo-item', {
+      
+          model: {},
+        
+          fireDone: function() {
+            this.fire('mark-done', { id: this.model.id });
+          },
+          
+          fireDelete: function() {
+            this.fire('delete-todo', { id: this.model.id });
+          }
+
+      });
+    })();
   </script>
 </polymer-element>

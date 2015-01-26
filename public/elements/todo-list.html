@@ -12,16 +12,37 @@
     <div>
     
       <template repeat="{{todo in todos}}">
-        <todo-item text="{{todo.text}}" done="{{todo.isDone}}">
+        <todo-item 
+          model="{{todo}}"
+          on-mark-done="{{toggleDone}}"
+          on-delete-todo="{{deleteTodo}}"
+          >
         </todo-item>
       </template>
       
     </div>
     
-    <todo-new-form></todo-new-form>
+    <todo-new-form on-submit="createTodo"></todo-new-form>
     
   </template>
   <script>
-    Polymer('todo-list', {});
+    (function () {
+      Polymer('todo-list', {
+      
+        deleteTodo: function (event, detail, sender) {
+          alert('clicked done on ' + detail.id);
+        },
+        
+        toggleDone: function (event, detail, sender) {
+            alert('clicked done on ' + detail.id);
+        },
+        
+        createTodo: function (event, detail, sender) {
+          alert('new todo!');
+        }
+      
+                           
+      });
+    })();
   </script>
 </polymer-element>

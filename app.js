@@ -13,6 +13,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set('view engine', 'ejs');
 // serve anything in the public directory unaltered
 app.use(express.static(path.join(__dirname, 'public')));
 
