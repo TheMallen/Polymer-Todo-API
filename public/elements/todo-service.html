@@ -11,7 +11,9 @@
     <mallen-crud id="http"
       endpoint="http://localhost:3000/api/todoItems"
       on-get-complete="{{loaded}}"
-      on-post-complete="{{posted}}">
+      on-post-complete="{{posted}}"
+      on-delete-complete="{{deleted}}"
+      on-put-complete="{{putted}}">
     </mallen-crud>
   
   </template>
@@ -29,13 +31,31 @@
         console.log(this.todos);
       },
       
+      deleted: function (event, detail, sender) {
+        this.$.http.get();
+      },
+      
+      putted: function (event, detail, sender) {
+        this.$.http.get();
+      },
+      
       posted: function (event, detail, sender) {
         this.$.http.get();
       },
 
       createTodo: function (text) {
         this.$.http.post({ 
-          body:JSON.stringify({ text: text })
+          body: { text: text }
+        });
+      },
+      
+      deleteTodo: function (id) {
+        this.$.http.delete(id);
+      },
+      
+      markDone: function (id) {
+        this.$.http.put(id, {
+          body: { isDone: true }
         });
       },
 

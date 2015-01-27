@@ -19,7 +19,7 @@
                  on-core-response="{{onPostComplete}}"
                  on-core-error="{{onPostError}}"></core-ajax>
         <core-ajax id="putRequest"
-                 url="{endpoint}}"
+                 url=""
                  handleAs="json"
                  contentType="application/json"
                  method="PUT"
@@ -27,7 +27,7 @@
                  on-core-error="{{onPutError}}">
         </core-ajax>
         <core-ajax id="deleteRequest"
-                 url="{{endpoint}}"
+                 url=""
                  handleAs="json"
                  contentType="application/json"
                  method="DELETE"
@@ -52,7 +52,9 @@
               var request = this.$[method + 'Request'];
               config = config || {};
               request.params = config.params;
-              request.body = config.body;
+              if (method == "post" || method == "put") {
+                request.body = JSON.stringify(config.body);
+              }
               request.go();
             },
             
@@ -68,12 +70,17 @@
               this._doRequest('post', config); 
             },
           
-            put: function (config) { 
-              this._doRequest('put', config); 
+            put: function (id, config) { 
+              var request = this.$.putRequest;
+              request.url = this.endpoint + '/' + id;
+              request.body = JSON.stringify(config.body);
+              request.go();
             },
           
-            delete: function (config) { 
-              this._doRequest('delete', config); 
+            delete: function (id) { 
+              var request = this.$.deleteRequest;
+              request.url = this.endpoint + '/' + id;
+              request.go();
             },
                 
             onGetComplete: function (e) {

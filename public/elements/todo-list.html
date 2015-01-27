@@ -6,7 +6,7 @@
 <polymer-element name="todo-list">
   <template>
     
-    <todo-service id="todo-service" todos="{{todos}}"></todo-service>
+    <todo-service id="tdservice" todos="{{todos}}"></todo-service>
     
     <div>
     
@@ -31,15 +31,15 @@
       Polymer('todo-list', {
       
         deleteTodo: function (event, detail, sender) {
-          alert('clicked done on ' + detail.id);
+          this.$.tdservice.deleteTodo(detail.id);
         },
         
         toggleDone: function (event, detail, sender) {
-            alert('clicked done on ' + detail.id);
+          this.$.tdservice.markDone(detail.id);
         },
         
         createTodo: function (event, detail, sender) {
-          this.$["todo-service"].createTodo(detail.text);
+          this.$.tdservice.createTodo(detail.text);
         }
                            
       });
