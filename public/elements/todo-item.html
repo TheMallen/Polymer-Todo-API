@@ -1,22 +1,47 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-icon/core-icon.html">
 
  <polymer-element name="todo-item" attributes="model">
   <template>
     <style>
+      h2 {
+        display: inline;
+      }
       #container {
         margin: 30px 30px;
       }
+      core-icon[icon="check"] {
+        color: #a4c639;
+        width: 32px;
+        height: 32px;
+        display: block;
+      }
+      core-icon[icon="close"] {
+        color: #de2b2b;
+        width: 32px;
+        height: 32px;
+      }
+      paper-button.done-true {
+        display: none;
+      }
+      core-icon[icon="check"].done-false {
+        display: none;
+      }
+      
     </style>
     <!-- shadow dom -->
-    <div id="container">
+    <div id="container" horizontal>
       <h2>{{model.text}}</h2>
-      <p>Done?: {{model.isDone}}</p>
-      <paper-button raised on-click="{{fireDone}}">
-        Mark DOne
+      <paper-button id="mark-done-btn" class="done-{{model.isDone}}" on-click="{{fireDone}}">
+         Mark
+         <core-icon icon="check-box"></core-icon>
       </paper-button>
-      <paper-button raised on-click="{{fireDelete}}">
+      <paper-button on-click="{{fireDelete}}">
         Delete
-      </button>
+        <core-icon class="done-{{model.isDone}}" icon="close"></core-icon>
+      </paper-button>
+      
+      <core-icon class="done-{{model.isDone}}" icon="check"></core-icon>
     </div>
     
   </template>
