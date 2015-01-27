@@ -1,7 +1,8 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../bower_components/core-input/core-input.html">
-<link rel="import" href="../bower_components/polymer/polymer.html">
- 
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
 <polymer-element name="todo-new-form">
  <template>
 
@@ -9,9 +10,9 @@
   <paper-input-decorator floatingLabel label="New Todo Item">
       <input is="core-input" id="newItem"></input>
   </paper-input-decorator>
-  <button on-click="{{fireSubmit}}">    
+  <paper-button raised on-click="{{fireSubmit}}">    
     Submit
-  </button>
+  </paper-button>
 
  </template>
  <script>
