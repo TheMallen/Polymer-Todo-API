@@ -2,8 +2,13 @@
 
  <polymer-element name="todo-item" attributes="model">
   <template>
+    <style>
+      #container {
+        margin: 30px 30px;
+      }
+    </style>
     <!-- shadow dom -->
-    <div>
+    <div id="container">
       <h2>{{model.text}}</h2>
       <p>Done?: {{model.isDone}}</p>
       <paper-button raised on-click="{{fireDone}}">

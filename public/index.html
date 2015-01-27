@@ -1,15 +1,38 @@
 <!DOCTYPE HTML>
 <html>
  <head>
+   
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+   <!--
+     Polymer imports
+   !-->
    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
    <link href="bower_components/paper-input/paper-input-decorator.html" rel="import">
+   <link href="bower_components/core-toolbar/core-toolbar.html" rel="import">
+   <!--
+     Cutom elements
+   !-->
    <link href="elements/todo-item.html" rel="import">
    <link href="elements/todo-list.html" rel="import">
    <link href="elements/mallen-crud.html" rel="import">
+ 
+   <style>
+     body{
+       font-family: 'Open Sans', sans-serif;
+     }
+     core-toolbar {
+        background-color: #03A9F4;
+     }
+   </style>
  </head>
  
-  <body unresolved>
-   <h1>Todo</h1>
-    <todo-list></todo-list>
+  <body fullbleed vertical layout unresolved>
+  <core-header-panel flex>
+    <core-toolbar id="mainheader">
+          <h1>Todo</h1>
+    </core-toolbar>
+
+      <todo-list></todo-list>
+    </core-header-panel>
   </body>
 </html>

@@ -6,13 +6,15 @@
 <polymer-element name="todo-new-form">
  <template>
 
-
-  <paper-input-decorator floatingLabel label="New Todo Item">
-      <input is="core-input" id="newItem"></input>
-  </paper-input-decorator>
-  <paper-button raised on-click="{{fireSubmit}}">    
-    Submit
-  </paper-button>
+  <div>
+     <paper-input-decorator floatingLabel label="New Todo Item">
+        <input is="core-input" id="newItem"></input>
+      </paper-input-decorator>
+      <paper-button raised on-click="{{fireSubmit}}">    
+        Submit
+      </paper-button>
+  </div>
+ 
 
  </template>
  <script>
