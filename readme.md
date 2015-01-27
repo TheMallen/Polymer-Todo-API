@@ -19,8 +19,9 @@ WHAT WORKS
 Installing
 -----------
 - install nodejs, npm, git, bower
-    - if you want to have an easy time installing this stuff try [Chocolatey](https://chocolatey.org/).
+    - if you want to have an easy time installing this stuff try [Chocolatey](https://chocolatey.org/). 
     - if you have chocolatey just use `choco install git`, `choco install nodejs`, `choco install npm`, `choco install git`, `npm install -g bower`
+    - alternatively you can try [OneGet](https://github.com/OneGet/oneget), which will be a standard windows service as of windows 10. 
 - clone the repository
 - run `npm install` and `bower install` on your console in the cloned directory
 - run `npm run start` 
