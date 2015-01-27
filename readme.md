@@ -13,8 +13,5 @@ WHAT WORKS
 - api works
 - todo-service element grabs json from api
 - todo-list grabs json data from todo-service
-- :P
-
-WHAT DOESN'T WORK
-------------------
-- CREATE, UPDATE (mark done), DELETE in the gui
+- Can create new TODOs and mark them as done
+- Can delete TODOS
