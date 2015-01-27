@@ -1,42 +1,43 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 
-<polymer-element name="mallen-restful-crud" attributes="endpoint methods">
+<polymer-element name="mallen-crud" attributes="endpoint methods">
     <template>
         
-        <ajax id="getRequest" 
+        <core-ajax id="getRequest" 
                  url="{{endpoint}}"
                  handleAs="json"
                  contentType="application/json"
                  method="GET"
-                 on-core-response="{{onGetCompleted}}"
-                 on-core-error="{{onGetError}}"></ajax>
-        <ajax id="postRequest"
+                 on-core-response="{{onGetComplete}}"
+                 on-core-error="{{onGetError}}"></core-ajax>
+        <core-ajax id="postRequest"
                  url="{{endpoint}}"
                  handleAs="json"
                  contentType="application/json"
                  method="POST"
-                 on-core-response="{{onPostCompleted}}"
-                 on-core-error="{{onPostError}}"></ajax>
-        <ajax id="putRequest"
+                 on-core-response="{{onPostComplete}}"
+                 on-core-error="{{onPostError}}"></core-ajax>
+        <core-ajax id="putRequest"
                  url="{endpoint}}"
                  handleAs="json"
                  contentType="application/json"
                  method="PUT"
-                 on-core-response="{{onPutCompleted}}"
-                 on-core-error="{{onPutError}}"><ajax>
-        <ajax id="deleteRequest"
+                 on-core-response="{{onPutComplete}}"
+                 on-core-error="{{onPutError}}">
+        </core-ajax>
+        <core-ajax id="deleteRequest"
                  url="{{endpoint}}"
                  handleAs="json"
                  contentType="application/json"
                  method="DELETE"
-                 on-core-response="{{onDeleteCompleted}}"
-                 on-core-error="{{onDeleteError}}"></ajax>
+                 on-core-response="{{onDeleteComplete}}"
+                 on-core-error="{{onDeleteError}}"></core-ajax>
 
     </template>
     <script>
       
-        Polymer('mallen-restful-crud', {
+        Polymer('mallen-crud', {
         
             endpoint: '',
           
@@ -47,43 +48,65 @@
               return (this.$.postRequest.loading || this.$.getRequest.loading || this.$.putRequest.loading || this.$.deleteRequest.loading);
             }, 
           
-            _doRequest: function (method, params, body) {
+            _doRequest: function (method, config) {
               var request = this.$[method + 'Request'];
-              request.params = params;
-              if (body) {
-                reqest.body = body;
-              }
+              config = config || {};
+              request.params = config.params;
+              request.body = config.body;
               request.go();
             },
             
             _fireAjaxEvent: function (method, outcome, e) {
-              this.fire(method + '-' + 'outcome', { response: e.detail.response });
+              this.fire(method + '-' + outcome, { response: e.detail.response });
             },
-        
-            created: function () {
-              
-              function capitalize(s) {
-                return s && s[0].toUpperCase() + s.slice(1);
-              }
-              
-              function bootstrapRoutesAndEvents(method) {
-                
-                this[method] = function (params, body) { 
-                  this._doRequest(method, params, body); 
-                };
-                
-                this['on' + capitalize(method) +  'Completed'] = function (params) { 
-                  this._fireAjaxEvent(method, 'completed', e);
-                };
-                
-                this['on' + capitalize(method) +  'Error'] = function (params) { 
-                  this._fireAjaxEvent(method, 'error', e);
-                };    
-              }
-              
-              this.methods.forEach(bootstrapRoutesAndEvents, this);
-            }
             
+            get: function (config) { 
+              this._doRequest('get', config); 
+            },
+          
+            post: function (config) { 
+              this._doRequest('post', config); 
+            },
+          
+            put: function (config) { 
+              this._doRequest('put', config); 
+            },
+          
+            delete: function (config) { 
+              this._doRequest('delete', config); 
+            },
+                
+            onGetComplete: function (e) {
+              this._fireAjaxEvent('get', 'complete', e);
+            },
+            
+            onPostComplete: function (e) {
+              this._fireAjaxEvent('post', 'complete', e);
+            },
+          
+            onPutComplete: function (e) {
+              this._fireAjaxEvent('put', 'complete', e);
+            },
+          
+            onDeleteComplete: function (e) {
+              this._fireAjaxEvent('delete', 'complete', e);
+            },
+                  
+            onGetError: function (e) {
+              this._fireAjaxEvent('get', 'Error', e);
+            },
+            
+            onPostError: function (e) {
+              this._fireAjaxEvent('post', 'Error', e);
+            },
+          
+            onPutError: function (e) {
+              this._fireAjaxEvent('put', 'Error', e);
+            },
+          
+            onDeleteError: function (e) {
+              this._fireAjaxEvent('delete', 'Error', e);
+            }
         });
     </script>
 </polymer-element>

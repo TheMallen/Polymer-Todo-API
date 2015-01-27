@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="mallen-crud.html">
 
 <polymer-element name="todo-service" attributes="todos">
   <template>
@@ -8,32 +8,39 @@
       display: none;
     }
     </style>
-    <core-ajax id="ajax"
-      auto
-      url="http://localhost:3000/api/todoItems"
-      on-core-response="{{loaded}}"
-      handleAs="json">
-    </core-ajax>
+    <mallen-crud id="http"
+      endpoint="http://localhost:3000/api/todoItems"
+      on-get-complete="{{loaded}}"
+      on-post-complete="{{posted}}">
+    </mallen-crud>
+  
   </template>
   <script>
   (function(){ 
     Polymer('todo-service', {
-      created: function() {
+      ready: function () {
         this.todos = [];
+        this.$.http.get();
       },
 
-      loaded: function() {
+      loaded: function (event, detail, sender) {
         // Make a copy of the loaded data
-        this.todos = this.$.ajax.response.slice(0);
+        this.todos = detail.response;
         console.log(this.todos);
       },
-
-      createTodo: function(text) {
-        console.log('create called, creating todo: ' + text);
+      
+      posted: function (event, detail, sender) {
+        this.$.http.get();
       },
 
-      loading: function() {
-        return this.$.ajax.loading;
+      createTodo: function (text) {
+        this.$.http.post({ 
+          body:JSON.stringify({ text: text })
+        });
+      },
+
+      loading: function () {
+        return this.$.http.loading;
       }
     });
   })();
